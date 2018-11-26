@@ -5,6 +5,8 @@ env:
 - DJANGO=2.0 DB=postgres
 before_install: 
 - cd decide
+- sudo apt-get update
+- sudo apt-get install postgresql postgresql-contrib
 - psql -c "select version();" -U postgres
 - psql -c "CREATE USER decide WITH PASSWORD 'decide';" -U postgres
 - psql -c "ALTER USER decide superuser;" -U postgres
