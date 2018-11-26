@@ -7,8 +7,6 @@ addons:
   postgresql: "9.6"
 before_install: 
 - cd decide
-- sudo apt-get update
-- psql -c "select version();" -U postgres
 - psql -c "CREATE USER decide WITH PASSWORD 'decide';" -U postgres
 - psql -c "ALTER USER decide superuser;" -U postgres
 install: 
