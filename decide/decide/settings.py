@@ -169,7 +169,7 @@ if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox':
 	    from local_settings import *
 	except ImportError:
 	    print("local_settings.py not found")	
-elif HOSTNAME == '939486e9-4278-4c53-9014-293184aa5b0b':
+else:
 	print ("HEROKU")
 	import django_heroku
 	django_heroku.settings(locals())
