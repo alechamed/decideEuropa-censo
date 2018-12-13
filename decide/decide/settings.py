@@ -156,14 +156,21 @@ STATIC_URL = '/static/'
 KEYBITS = 256
 APIS = {}
 
-import django_heroku
-django_heroku.settings(locals())
+import socket
 
-if !settings.CURRENT_HOST_IP == 'decideeuropacenso.herokuapp.com':
+try:
+    HOSTNAME = socket.gethostname()
+except:
+    HOSTNAME = 'localhost'
+
+if HOSTNAME == 'localhost':
 	try:
 	    from local_settings import *
 	except ImportError:
-	    print("local_settings.py not found")
+	    print("local_settings.py not found")	
+else:
+	import django_heroku
+	django_heroku.settings(locals())
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
