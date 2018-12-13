@@ -159,10 +159,11 @@ APIS = {}
 import django_heroku
 django_heroku.settings(locals())
 
-try:
-    from local_settings import *
-except ImportError:
-    print("local_settings.py not found")
+if !settings.CURRENT_HOST_IP == 'decideeuropacenso.herokuapp.com':
+	try:
+	    from local_settings import *
+	except ImportError:
+	    print("local_settings.py not found")
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
