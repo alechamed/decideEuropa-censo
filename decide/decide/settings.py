@@ -163,13 +163,14 @@ try:
 except:
     HOSTNAME = 'localhost'
 print (HOSTNAME)
-if HOSTNAME == 'localhost':
+if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox':
 	print ("ENTRA")
 	try:
 	    from local_settings import *
 	except ImportError:
 	    print("local_settings.py not found")	
 else:
+	print ("NO ENTRA")
 	import django_heroku
 	django_heroku.settings(locals())
 
