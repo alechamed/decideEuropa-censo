@@ -162,8 +162,9 @@ try:
     HOSTNAME = socket.gethostname()
 except:
     HOSTNAME = 'localhost'
-
+print (HOSTNAME)
 if HOSTNAME == 'localhost':
+	print ("ENTRA")
 	try:
 	    from local_settings import *
 	except ImportError:
