@@ -29,16 +29,16 @@ APIS = {
 
 BASEURL = 'https://decideeuropacenso.herokuapp.com'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dakir806ijcjbj',
-        'USER': 'jfiqfweoewadiu',
-	'PASSWORD': 'dcea99ecde4f1c66c6224a052bba6fa63b3b7c8bfc27d38a629608471f170215',
-        'HOST': 'ec2-174-129-41-12.compute-1.amazonaws.com',
-        'PORT': 5432,
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'dakir806ijcjbj',
+#        'USER': 'jfiqfweoewadiu',
+#	'PASSWORD': 'dcea99ecde4f1c66c6224a052bba6fa63b3b7c8bfc27d38a629608471f170215',
+#        'HOST': 'ec2-174-129-41-12.compute-1.amazonaws.com',
+#        'PORT': 5432,
+#    }
+#}
 
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
