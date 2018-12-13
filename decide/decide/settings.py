@@ -1,6 +1,3 @@
-import django_heroku
-django_heroku.settings(locals())
-
 """
 Django settings for decide project.
 
@@ -159,7 +156,8 @@ STATIC_URL = '/static/'
 KEYBITS = 256
 APIS = {}
 
-
+import django_heroku
+django_heroku.settings(locals())
 
 try:
     from local_settings import *
@@ -168,4 +166,5 @@ except ImportError:
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
+
 
