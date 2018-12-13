@@ -171,7 +171,7 @@ if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox':
 	    print("local_settings.py not found")	
 else:
 	print ("HEROKU")
-	import dj_database_heroku
+	import dj_database_url
 	DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 	#try:
 	#    from remote_settings import *
