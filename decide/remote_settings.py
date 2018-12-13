@@ -35,7 +35,7 @@ DATABASES = {
         'NAME': 'dakir806ijcjbj',
         'USER': 'jfiqfweoewadiu',
 	'PASSWORD': 'dcea99ecde4f1c66c6224a052bba6fa63b3b7c8bfc27d38a629608471f170215',
-        'HOST': 'postgres://jfiqfweoewadiu:dcea99ecde4f1c66c6224a052bba6fa63b3b7c8bfc27d38a629608471f170215@ec2-174-129-41-12.compute-1.amazonaws.com:5432/dakir806ijcjbj',
+        'HOST': 'ec2-174-129-41-12.compute-1.amazonaws.com',
         'PORT': 5432,
     }
 }
