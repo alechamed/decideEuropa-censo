@@ -10,15 +10,18 @@ from rest_framework.status import (
         HTTP_409_CONFLICT as ST_409
 )
 
-from base.perms import UserIsStaff
+from rest_framework.permissions import AllowAny
+# from base.perms import UserIsStaff
 from .models import Census
 from django.shortcuts import render
-from django.views.generic.base import TemplateView
+from django.views.generic import TemplateView
+from django.contrib.auth.models import User
+from voting.models import Voting
 
-
+        
 class CensusCreate(TemplateView):
-    template_name = '/censusCreate.html'
-    permission_classes = (UserIsStaff,)
+    
+    permission_classes = (AllowAny,)
 
     def create(self, request, *args, **kwargs):
         voting_id = request.data.get('voting_id')
@@ -31,10 +34,15 @@ class CensusCreate(TemplateView):
             return Response('Error try to create census', status=ST_409)
         return Response('Census created', status=ST_201)
 
-    def list(self, request, *args, **kwargs):
+    # def list(self, request, *args, **kwargs):
+    def list(request, *args, **kwargs):
+        template_name = "census/censusList.html"
         voting_id = request.GET.get('voting_id')
-        voters = Census.objects.filter(voting_id=voting_id).values_list('voter_id', flat=True)
-        return Response({'voters': voters})
+        # voters = Census.objects.filter(voting_id=voting_id).values_list('voter_id', flat=True)
+        voters = Census.objects.all()
+        users = User.objects.all()                
+        return render(request, "census/censusList.html", {'users': users, 'voting':voting_id, 'voters':voters})
+        # return Response({'voters':voters})                       
 
 
 class CensusDetail(generics.RetrieveDestroyAPIView):
@@ -52,3 +60,4 @@ class CensusDetail(generics.RetrieveDestroyAPIView):
         except ObjectDoesNotExist:
             return Response('Invalid voter', status=ST_401)
         return Response('Valid voter')
+        
