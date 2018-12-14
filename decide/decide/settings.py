@@ -68,18 +68,8 @@ MODULES = [
     'voting',
 ]
 
-try:
-    HOSTNAME = socket.gethostname()
-except:
-    HOSTNAME = 'localhost'
-print (HOSTNAME)
 
-if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox':
-	BASEURL = 'http://localhost:8000'
-else:
-	BASEURL = 'https://decideeuropacenso.herokuapp.com/'
-
-
+BASEURL = 'https://decideeuropacenso.herokuapp.com/'
 
 
 MIDDLEWARE = [
@@ -169,7 +159,11 @@ APIS = {}
 
 import socket
 
-
+try:
+    HOSTNAME = socket.gethostname()
+except:
+    HOSTNAME = 'localhost'
+print (HOSTNAME)
 if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox':
 	print ("LOCAL")
 	try:
