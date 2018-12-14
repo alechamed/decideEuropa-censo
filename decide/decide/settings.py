@@ -164,7 +164,7 @@ try:
 except:
     HOSTNAME = 'localhost'
 print (HOSTNAME)
-if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox':
+if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox' or "travis-job" in HOSTNAME:
 	print ("LOCAL")
 	try:
 	    from local_settings import *
