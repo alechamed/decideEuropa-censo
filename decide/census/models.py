@@ -15,6 +15,6 @@ class Usuario(models.Model):
     email = models.CharField(max_length = 50) #Único
     username = models.CharField(max_length = 50) #Único
     password = models.CharField(max_length = 50)
-    is_staff = models.BooleanField(null=false) #True or false
-    is_active = models.BooleanField(null=false) #Activo o inactivo 
-    date_joined = models.DateField(null=false)
+    is_staff = models.BooleanField(null=False) #True or false
+    is_active = models.BooleanField(null=False) #Activo o inactivo 
+    date_joined = models.DateField(null=False)
