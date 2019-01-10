@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        {% extends "base.html" %}
+        {% load i18n static %}
+        {% block content %}
+        <h1>Census:</h1>
+        {% for user in users %}
+        <ul>
+            <li>
+                {{ user }}-{{voters}}
+            </li>
+        </ul>
+        {% endfor %}
+        {% endblock %}
+        {% if models.usuarios %}
+            <table class="userTable">
+                <thead>
+                    <tr>
+                        <th class="userColumn">Nombre</th>
+                        <th class="userColumn">Apellido</th> 
+                        <th class="userColumn">E-mail</th> 
+                        <th class="userColumn">Nombre de usuario</th> 
+                        <th class="userColumn">Contraseña</th> 
+                        <th class="userColumn">Trabajador</th>
+                        <th class="userColumn">Activo</th>
+                        <th class="userColumn">Fecha de unión</th>
+                    </tr>
+                </thead>
+            </table>
+        {% for usuario in usuarios %} 
+        {% endif %}   
+    </body>
+</html>
