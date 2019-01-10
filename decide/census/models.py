@@ -1,8 +1,5 @@
 from django.db import models
-<<<<<<< HEAD
-=======
 from jsonschema._validators import maxLength
->>>>>>> EC1-FrontEnd
 
 
 class Census(models.Model):
@@ -11,8 +8,6 @@ class Census(models.Model):
 
     class Meta:
         unique_together = (('voting_id', 'voter_id'),)
-<<<<<<< HEAD
-=======
 
 class Usuario(models.Model):
     first_name = models.CharField(max_length = 50)
@@ -23,4 +18,3 @@ class Usuario(models.Model):
     is_staff = models.BooleanField(null=false) #True or false
     is_active = models.BooleanField(null=false) #Activo o inactivo 
     date_joined = models.DateField(null=false)
->>>>>>> EC1-FrontEnd
