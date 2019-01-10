@@ -68,7 +68,13 @@ MODULES = [
     'voting',
 ]
 
+<<<<<<< HEAD
+
+BASEURL = 'https://decideeuropacenso.herokuapp.com/'
+
+=======
 BASEURL = 'http://localhost:8000'
+>>>>>>> EC1-FrontEnd
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,6 +156,36 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+<<<<<<< HEAD
+
+# number of bits for the key, all auths should use the same number of bits
+KEYBITS = 256
+APIS = {}
+
+import socket
+
+try:
+    HOSTNAME = socket.gethostname()
+except:
+    HOSTNAME = 'localhost'
+print (HOSTNAME)
+if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox' or "travis-job" in HOSTNAME:
+	print ("LOCAL")
+	try:
+	    from local_settings import *
+	except ImportError:
+	    print("local_settings.py not found")	
+else:
+	print ("HEROKU")
+	import django_heroku
+	django_heroku.settings(locals())
+	import dj_database_url
+	DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)	
+	try:
+	    from remote_settings import *
+	except ImportError:
+	    print("remote_settings.py not found")
+=======
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
 
@@ -157,6 +193,7 @@ try:
     from local_settings import *
 except ImportError:
     print("local_settings.py not found")
+>>>>>>> EC1-FrontEnd
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
