@@ -75,7 +75,7 @@ class CensusTestCase(BaseTestCase):
         self.assertEqual(0, Census.objects.count())
         
     def test_model_census(self):
-        self.census = Census.objects.create(voting_id=1, voter_id=1)
-        self.assertEqual(voting_id, 1)
+        self.census = Census.objects.create(voting_id=2, voter_id=1)
+        self.assertEqual(voting_id, 2)
         self.assertEqual(voter_id, 1)
         
