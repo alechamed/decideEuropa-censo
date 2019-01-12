@@ -68,13 +68,9 @@ MODULES = [
     'voting',
 ]
 
-<<<<<<< HEAD
 
 BASEURL = 'https://decideeuropacenso.herokuapp.com/'
 
-=======
-BASEURL = 'http://localhost:8000'
->>>>>>> EC1-FrontEnd
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -156,7 +152,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
 
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
@@ -185,15 +180,6 @@ else:
 	    from remote_settings import *
 	except ImportError:
 	    print("remote_settings.py not found")
-=======
-# number of bits for the key, all auths should use the same number of bits
-KEYBITS = 256
-
-try:
-    from local_settings import *
-except ImportError:
-    print("local_settings.py not found")
->>>>>>> EC1-FrontEnd
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
