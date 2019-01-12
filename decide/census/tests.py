@@ -83,4 +83,21 @@ class CensusTestCase(BaseTestCase):
         self.census = Census.objects.create(voting_id=2, voter_id=1)
         self.assertNotEqual(self.census.voting_id, 1)
         self.assertNotEqual(self.census.voter_id, 2)
+
+        
+class ExportActionAdminIntegrationTest(TestCase):
+
+    def setUp(self):
+        user = User.objects.create_user('admin', 'admin@example.com',
+                                        'password')
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+
+        self.census1 = Census.objects.create(voting_id=1, voter_id=1)
+        self.census2 = Census.objects.create(voting_id=1, voter_id=2)
+        self.census3 = Census.objects.create(voting_id=1, voter_id=3)
+        self.census4 = Census.objects.create(voting_id=1, voter_id=4)
+
+        self.client.login(username='admin', password='password')
         
