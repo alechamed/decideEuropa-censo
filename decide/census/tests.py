@@ -55,7 +55,7 @@ class CensusTestCase(BaseTestCase):
         self.assertEqual(response.status_code, 409)
 
     def test_add_new_voters(self):
-        data = {'voting_id': 2, 'voters': [1,2,3,4]}
+        data = {'voting_id': 2, 'voters': [1, 2, 3, 4]}
         response = self.client.post('/census/', data, format='json')
         self.assertEqual(response.status_code, 401)
 
@@ -73,3 +73,31 @@ class CensusTestCase(BaseTestCase):
         response = self.client.delete('/census/{}/'.format(1), data, format='json')
         self.assertEqual(response.status_code, 204)
         self.assertEqual(0, Census.objects.count())
+        
+    def test_model_census_positive(self):
+        self.census = Census.objects.create(voting_id=2, voter_id=1)
+        self.assertEqual(self.census.voting_id, 2)
+        self.assertEqual(self.census.voter_id, 1)
+    
+    def test_model_census_negative(self):
+        self.census = Census.objects.create(voting_id=2, voter_id=1)
+        self.assertNotEqual(self.census.voting_id, 1)
+        self.assertNotEqual(self.census.voter_id, 2)
+
+        
+class ExportActionAdminIntegrationTest(TestCase):
+
+    def setUp(self):
+        user = User.objects.create_user('admin', 'admin@example.com',
+                                        'password')
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+
+        self.census1 = Census.objects.create(voting_id=1, voter_id=1)
+        self.census2 = Census.objects.create(voting_id=1, voter_id=2)
+        self.census3 = Census.objects.create(voting_id=1, voter_id=3)
+        self.census4 = Census.objects.create(voting_id=1, voter_id=4)
+
+        self.client.login(username='admin', password='password')
+        
