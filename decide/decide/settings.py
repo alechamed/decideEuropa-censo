@@ -43,8 +43,16 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
+<<<<<<< HEAD
 ]
 
+=======
+    'import_export',
+]
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+
+>>>>>>> origin/EC4-Excel
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',

@@ -10,3 +10,4 @@ django-heroku
 gunicorn
 psycopg2-binary
 dj-database-url
+django-import-export
