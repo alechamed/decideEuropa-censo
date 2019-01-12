@@ -81,6 +81,6 @@ class CensusTestCase(BaseTestCase):
     
     def test_model_census_negative(self):
         self.census = Census.objects.create(voting_id=2, voter_id=1)
-        self.assertNotEqual(self.census.voting_id, 2)
-        self.assertNotEqual(self.census.voter_id, 1)
+        self.assertNotEqual(self.census.voting_id, 1)
+        self.assertNotEqual(self.census.voter_id, 2)
         
