@@ -8,13 +8,3 @@ class Census(models.Model):
 
     class Meta:
         unique_together = (('voting_id', 'voter_id'),)
-
-class Usuario(models.Model):
-    first_name = models.CharField(max_length = 50)
-    last_name = models.CharField(max_length = 50)
-    email = models.CharField(max_length = 50) #Único
-    username = models.CharField(max_length = 50) #Único
-    password = models.CharField(max_length = 50)
-    is_staff = models.BooleanField(null=False) #True or false
-    is_active = models.BooleanField(null=False) #Activo o inactivo 
-    date_joined = models.DateField(null=False)
