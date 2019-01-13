@@ -60,6 +60,23 @@ def reutVoter(modeladmin, request, queryset):
 
 reutVoter.short_description = 'Reuse censuss for a voter'
 
+def removeVoterAllCensus(modeladmin, request, queryset):
+	if 'yes' in request.POST: 	
+		modeladmin.message_user(request, "Voter/s deleted")          	
+		for q in queryset:
+			for c in Census.objects.all():
+				if c.voter_id==q.voter_id:
+					c.delete()
+	
+				
+		return HttpResponseRedirect(request.get_full_path())
+	if'no' in request.POST:
+		return HttpResponseRedirect(request.get_full_path())
+	return render(request, 'removeVoter.html', context={'censuss': queryset})
+
+removeVoterAllCensus.short_description = 'Remove voter/s from all censuss'
+
+
 #Cambié la entrada del census admin para añadir el boton import/export
 class CensusAdmin(ImportExportModelAdmin):
 	#Se añade esta linea para añadir los botones import/export
@@ -69,6 +86,6 @@ class CensusAdmin(ImportExportModelAdmin):
 
 	search_fields = ('voter_id', )
 	#Se añade el metodo de export a la lista de acciones de django
-	actions = [export_selected, reutVoting, reutVoter]
+	actions = [export_selected, reutVoting, reutVoter, removeVoterAllCensus]
 
 admin.site.register(Census, CensusAdmin)

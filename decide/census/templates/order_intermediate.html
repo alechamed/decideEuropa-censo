@@ -5,7 +5,7 @@
   {% csrf_token %}
 <p>  
 What voting you want to add the census to? 
-    <input type="text" name="selected_voting_id" />
+    <input type="number" min="1" name="selected_voting_id" />
 </p>  Voter IDs<ul>
   {% for census in censuss %}
     <li>
