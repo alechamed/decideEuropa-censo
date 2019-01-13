@@ -32,7 +32,7 @@ def export_selected(modeladmin, request, queryset):
 #Le pongo un nombre para que salga en la lista de acciones
 export_selected.short_description = 'Export selected as xls'
 
-def reut(modeladmin, request, queryset):
+def reutVoting(modeladmin, request, queryset):
 	if 'apply' in request.POST: 	
 		modeladmin.message_user(request, "Created new censuss")          	
 		for q in queryset:
@@ -44,7 +44,21 @@ def reut(modeladmin, request, queryset):
 		return HttpResponseRedirect(request.get_full_path())
 	return render(request, 'order_intermediate.html', context={'censuss': queryset})
 
-reut.short_description = 'Reuse censuss in another voting'
+reutVoting.short_description = 'Reuse censuss in another voting'
+
+def reutVoter(modeladmin, request, queryset):
+	if 'apply' in request.POST: 	
+		modeladmin.message_user(request, "Created new censuss")          	
+		for q in queryset:
+			census = Census(voting_id=q.voting_id, voter_id=request.POST.get("selected_voting_id"))
+			try:			
+				census.save()
+			except IntegrityError:
+				empty = lambda: None	
+		return HttpResponseRedirect(request.get_full_path())
+	return render(request, 'reuseVoter.html', context={'censuss': queryset})
+
+reutVoter.short_description = 'Reuse censuss for a voter'
 
 #Cambié la entrada del census admin para añadir el boton import/export
 class CensusAdmin(ImportExportModelAdmin):
@@ -55,6 +69,6 @@ class CensusAdmin(ImportExportModelAdmin):
 
 	search_fields = ('voter_id', )
 	#Se añade el metodo de export a la lista de acciones de django
-	actions = [export_selected, reut]
+	actions = [export_selected, reutVoting, reutVoter]
 
 admin.site.register(Census, CensusAdmin)
