@@ -52,7 +52,9 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
+#Descomentar el localsettings si se va a subir el fork
+#local_settings.py
+
 
 # Flask stuff:
 instance/
