@@ -87,15 +87,8 @@ class CensusTestCase(BaseTestCase):
         
 class ExportActionAdminIntegrationTest(TestCase):
 
-    def setUp(self):
-        user = User.objects.create_user('admin1', 'admin@example.com')
-        user.set_password('password')
-        
-        user.is_staff = True
-        user.is_superuser = True
-        user.save()
-        
-        self.client.login(username='admin1', password='password')
+    def setUp(self):        
+        self.client.login(username='admin', password='riku1994')
     
     def test_export(self):
         response = self.client.get('/admin/census/census/export/')
@@ -105,20 +98,20 @@ class ExportActionAdminIntegrationTest(TestCase):
             'file_format': '0',
             }
         response = self.client.post('/admin/census/census/export/', data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         self.assertTrue(response.has_header("Content-Disposition"))
         self.assertEqual(response['Content-Type'], 'text/csv')
         
     def test_returns_xlsx_export(self):
         response = self.client.get('/admin/census/census//export/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         data = {
             'file_format': '2',
             }
         
         response = self.client.post('//admin/census/census/export/', data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         self.assertTrue(response.has_header("Content-Disposition"))
         self.assertEqual(response['Content-Type'],
                          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
