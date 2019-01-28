@@ -100,7 +100,7 @@ class ExportActionAdminIntegrationTest(TestCase):
         response = self.client.post('/admin/census/census/export/', data)
         self.assertEqual(response.status_code, 302)
         self.assertFalse(response.has_header("Content-Disposition"))
-        self.assertEqual(response['Content-Type'], 'text/csv')
+        self.assertEqual(response['Content-Type'], 'text/html; charset=utf-8')
         
     def test_returns_xlsx_export(self):
         response = self.client.get('/admin/census/census//export/')
@@ -114,4 +114,4 @@ class ExportActionAdminIntegrationTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertFalse(response.has_header("Content-Disposition"))
         self.assertEqual(response['Content-Type'],
-                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                         'text/html; charset=utf-8')
