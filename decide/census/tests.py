@@ -92,7 +92,7 @@ class ExportActionAdminIntegrationTest(TestCase):
     
     def test_export(self):
         response = self.client.get('/admin/census/census/export/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         data = {
             'file_format': '0',
@@ -110,7 +110,7 @@ class ExportActionAdminIntegrationTest(TestCase):
             'file_format': '2',
             }
         
-        response = self.client.post('//admin/census/census/export/', data)
+        response = self.client.post('/admin/census/census/export/', data)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.has_header("Content-Disposition"))
         self.assertEqual(response['Content-Type'],
