@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.db.utils import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics
@@ -52,7 +51,7 @@ class CensusDetail(generics.RetrieveDestroyAPIView):
         except ObjectDoesNotExist:
             return Response('Invalid voter', status=ST_401)
         return Response('Valid voter')
-=======
+
 from django.db.utils import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics
@@ -115,5 +114,3 @@ class CensusDetail(generics.RetrieveDestroyAPIView):
         except ObjectDoesNotExist:
             return Response('Invalid voter', status=ST_401)
         return Response('Valid voter')
-        
->>>>>>> EC1-FrontEnd
