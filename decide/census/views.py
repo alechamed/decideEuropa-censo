@@ -33,7 +33,6 @@ class CensusCreate(generics.ListCreateAPIView):
         voting_id = request.GET.get('voting_id')
         voters = Census.objects.filter(voting_id=voting_id).values_list('voter_id', flat=True)
         return Response({'voters': voters})
-        
 
 
 class CensusDetail(generics.RetrieveDestroyAPIView):
@@ -51,6 +50,7 @@ class CensusDetail(generics.RetrieveDestroyAPIView):
         except ObjectDoesNotExist:
             return Response('Invalid voter', status=ST_401)
         return Response('Valid voter')
+
 
 from django.db.utils import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
@@ -115,11 +115,28 @@ class CensusDetail(generics.RetrieveDestroyAPIView):
             return Response('Invalid voter', status=ST_401)
         return Response('Valid voter')
 
+
 class CensusFilter(TemplateView):
     
-    def list(request):
+    def listUsers(request):
         users = User.objects.all()
         return render (request, 'censusFilter.html', {'users':users})
+    
+    def listNombre(request):
+        users = User.objects.filter()
+        return render (request, 'censusFilter2.html', {'users':users})
+    
+    def listActivos(request):
+        users = User.objects.filter(is_active=True)
+        noUsers = User.objects.filter(is_active=False)
+        return render (request, 'censusFilter3.html', {'users': users, 'noUsers':noUsers})
+    
+    def listStaff(request):
+        users = User.objects.filter(is_staff=True)
+        noUsers = User.objects.filter(is_staff=False)
+        return render (request, 'censusFilter4.html', {'users': users, 'noUsers':noUsers}) 
 
-
-        
+    def listSuperuser(request):
+        users = User.objects.filter(is_superuser=True)
+        noUsers = User.objects.filter(is_superuser=False)
+        return render (request, 'censusFilter5.html', {'users': users, 'noUsers':noUsers})

@@ -78,13 +78,14 @@
         {% load i18n static %}
         {% block content %}
         <h1>Census:</h1>
+        <h2>SuperUsuarios</h2>
         {% for user in users %}
         <ul>
             <li class="b">
                 {{ user }}
             </li>
         </ul>
-        {% endfor %}
+        {%endfor%}
         {% endblock %}
     </body>
 </html>
