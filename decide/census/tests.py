@@ -96,6 +96,7 @@ class ExportActionAdminIntegrationTest(TestCase):
         self.client.login(username='admin1', password='password')
     
     def test_export(self):
+        self.login()
         response = self.client.get('/admin/census/census/export/')
         self.assertEqual(response.status_code, 200)
 
@@ -108,6 +109,7 @@ class ExportActionAdminIntegrationTest(TestCase):
         self.assertEqual(response['Content-Type'], 'text/csv')
         
     def test_returns_xlsx_export(self):
+        self.login()
         response = self.client.get('/admin/census/census//export/')
         self.assertEqual(response.status_code, 200)
 
