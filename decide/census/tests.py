@@ -88,13 +88,7 @@ class CensusTestCase(BaseTestCase):
 class ExportActionAdminIntegrationTest(TestCase):
 
     def setUp(self):
-        user = User.objects.create_user('admin', 'admin@example.com',
-                                        'password')
-        user.is_staff = True
-        user.is_superuser = True
-        user.save()
-
-        self.client.login(username='admin', password='password')
+        self.client.login(username='admin', password='BfB28nilo')
     
     def test_export(self):
         response = self.client.get('/admin/census/census/export/')
