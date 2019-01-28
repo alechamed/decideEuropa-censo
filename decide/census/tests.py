@@ -94,10 +94,30 @@ class ExportActionAdminIntegrationTest(TestCase):
         user.is_superuser = True
         user.save()
 
-        self.census1 = Census.objects.create(voting_id=1, voter_id=1)
-        self.census2 = Census.objects.create(voting_id=1, voter_id=2)
-        self.census3 = Census.objects.create(voting_id=1, voter_id=3)
-        self.census4 = Census.objects.create(voting_id=1, voter_id=4)
-
         self.client.login(username='admin', password='password')
+    
+    def test_export(self):
+        response = self.client.get('/admin/census/census/export/')
+        self.assertEqual(response.status_code, 200)
+
+        data = {
+            'file_format': '0',
+            }
+        response = self.client.post('/admin/census/census/export/', data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.has_header("Content-Disposition"))
+        self.assertEqual(response['Content-Type'], 'text/csv')
         
+    def test_returns_xlsx_export(self):
+        response = self.client.get('/admin/census/census//export/')
+        self.assertEqual(response.status_code, 200)
+
+        data = {
+            'file_format': '2',
+            }
+        
+        response = self.client.post('//admin/census/census/export/', data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.has_header("Content-Disposition"))
+        self.assertEqual(response['Content-Type'],
+                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
