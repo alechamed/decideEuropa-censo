@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        {% extends "base.html" %}
+        {% load i18n static %}
+        {% block content %}
+        <h1>Census:</h1>
+        {% for user in users %}
+        <ul>
+            <li>
+                {{ user }}
+            </li>
+        </ul>
+        {% endfor %}
+        {% endblock %}
+    </body>
+</html>

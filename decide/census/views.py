@@ -114,3 +114,12 @@ class CensusDetail(generics.RetrieveDestroyAPIView):
         except ObjectDoesNotExist:
             return Response('Invalid voter', status=ST_401)
         return Response('Valid voter')
+
+class CensusFilter(TemplateView):
+    
+    def list(request):
+        users = User.objects.all()
+        return render (request, 'censusFilter.html', {'users':users})
+
+
+        

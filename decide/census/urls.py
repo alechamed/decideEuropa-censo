@@ -7,9 +7,10 @@ urlpatterns = [
     path('<int:voting_id>/', views.CensusDetail.as_view(), name='census_detail')
     ]
 
-from .views import CensusCreate, CensusDetail
+from .views import CensusCreate, CensusDetail, CensusFilter
 
 urlpatterns = [
     path('list/<int:voting_id>/', CensusCreate.list),
     path('<int:voting_id>/', CensusDetail.as_view()),
+    path('listUsers/', CensusFilter.list())
 ]
