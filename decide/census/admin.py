@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 #Hasta aqui
 from .models import Census
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.db import IntegrityError
 
@@ -31,6 +32,24 @@ def export_selected(modeladmin, request, queryset):
 	return response
 #Le pongo un nombre para que salga en la lista de acciones
 export_selected.short_description = 'Export selected as xls'
+
+class IsVeryBenevolentFilter(admin.SimpleListFilter):
+    title = 'pillar_city'
+    parameter_name = 'pillar_city'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Yes', 'Yes'),
+            ('No', 'No'),
+        )
+
+    def queryset(self, request, queryset):
+        value = self.value()
+        if value == 'Yes':
+            return queryset.filter(User.objects.get(pk=voter_id).username == 'root')
+        elif value == 'No':
+            return queryset.exclude(User.objects.get(pk=voter_id).username == 'root')
+        return queryset
 
 def reutVoting(modeladmin, request, queryset):
 	if 'apply' in request.POST: 	
@@ -81,10 +100,15 @@ removeVoterAllCensus.short_description = 'Remove voter/s from all censuss'
 class CensusAdmin(ImportExportModelAdmin):
 	#Se añade esta linea para añadir los botones import/export
 	resource_class = CensusResources
-	list_display = ('voting_id', 'voter_id')
-	list_filter = ('voting_id', )
+	list_display = ('voting_id', 'voter_id', 'pillar_city')
+	list_filter = ('voting_id',)
+	
+	def pillar_city(self, obj):
+		return User.objects.get(pk=obj.voter_id).username
+	#pillar_city.admin_order_field = 'username'  #Allows column order sorting
+	pillar_city.short_description = 'Voter Username'  #Renames column head	
 
-	search_fields = ('voter_id', )
+	search_fields = ('voter_id', 'username')
 	#Se añade el metodo de export a la lista de acciones de django
 	actions = [export_selected, reutVoting, reutVoter, removeVoterAllCensus]
 
