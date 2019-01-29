@@ -13,8 +13,4 @@ install:
 - pip3 install -r ../requirements.txt
 script: 
 - python3 manage.py test
-deploy:
-  provider: heroku
-  api_key: af4c448b-fe95-4b0f-972c-cd8812fbd14b
-  app:
-    master: decideeuropacenso
+- git push heroku master
