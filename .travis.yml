@@ -13,9 +13,8 @@ install:
 - pip install -r ../requirements.txt
 script: 
 - python3 manage.py test
-if: branch = master AND type = push
-  deploy:
-    provider: heroku
-    api_key: af4c448b-fe95-4b0f-972c-cd8812fbd14b
-    app:
-      master: decideeuropacenso
+deploy:
+  provider: heroku
+  api_key: af4c448b-fe95-4b0f-972c-cd8812fbd14b
+  app:
+    master: decideeuropacenso
