@@ -13,3 +13,5 @@ install:
 - pip install -r ../requirements.txt
 script: 
 - python3 manage.py test
+if: branch = master AND type = push
+git push heroku master
