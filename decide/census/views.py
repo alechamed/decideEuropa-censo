@@ -63,25 +63,9 @@ class CensusDetail(generics.RetrieveDestroyAPIView):
 
 
 class CensusFilter(TemplateView):
-    def busqueda(cursor):
-        lb = []
-        for row in cursor:
-            a = str(row[0])
-            b = str(row[1])
-            c = str(row[2])
-            d = str(row[3])
-            e = str(row[4])
-            lb.append(a)
-            lb.append(b)
-            lb.append(c)
-            lb.append(d)
-            lb.append(e)
-        return lb 
-    
     def listUsers(request):
         users = User.objects.all()
-        return render (request, 'censusFilter1.html', {'users':users})
-    
+        return render (request, 'censusFilter1.html', {'users':users})    
     
     def listActivos(request):
         users = User.objects.filter(is_active=True)
