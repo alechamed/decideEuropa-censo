@@ -8,7 +8,7 @@ urlpatterns = [
     path('listUsers/', CensusFilter.listUsers),
     path('listActivo/', CensusFilter.listActivos),
     path('listStaff/', CensusFilter.listStaff),
-    path('listSuperuser/', CensusFilter.listSuperuser)
-#     path('', views.CensusCreate.as_view(), name='census_create'),
+    path('listSuperuser/', CensusFilter.listSuperuser),
+    path('', CensusCreate.as_view(), name='census_create')
 #     path('<int:voting_id>/', views.CensusDetail.as_view(), name='census_detail')   
 ]
