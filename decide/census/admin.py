@@ -5,6 +5,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 #Hasta aqui
 from .models import Census
 from django.shortcuts import render
@@ -61,7 +62,7 @@ def reutVoter(modeladmin, request, queryset):
 reutVoter.short_description = 'Reuse censuss for a voter'
 
 def removeVoterAllCensus(modeladmin, request, queryset):
-	if 'yes' in request.POST: 	
+	if 'yes' in request.POST:
 		modeladmin.message_user(request, "Voter/s deleted")          	
 		for q in queryset:
 			for c in Census.objects.all():
@@ -76,6 +77,44 @@ def removeVoterAllCensus(modeladmin, request, queryset):
 
 removeVoterAllCensus.short_description = 'Remove voter/s from all censuss'
 
+def loadLDAP(modeladmin, request, queryset):
+	print("sientrajajajaj")
+	if 'apply' in request.POST:
+		archivo = request.FILES['file'].read().decode("utf-8")
+		lineas = archivo.split('\n')
+		uids = set()
+		exist = set()
+		votaciones = set()
+		for l in lineas:
+			l = l.replace(" ", "")
+			aux=l.split('uid=')
+			if len(aux) > 1:
+				pl = aux[1]
+				uids.add(pl.split(',')[0])
+		
+		for uid in uids:
+			usuario = User.objects.filter(username=uid)
+			if usuario:
+				exist.add(usuario[0].id)
+			
+		for q in queryset:
+			votaciones.add(q.voting_id)
+
+		for votacion in votaciones:
+			for votante in exist:
+				print(votante)
+				census = Census(voting_id=votacion, voter_id=votante)
+				try:			
+					census.save()
+				except IntegrityError:
+					empty = lambda: None
+
+		return HttpResponseRedirect(request.get_full_path())
+
+	return render(request, 'load_ldap.html', context={'censuss': queryset})
+
+loadLDAP.short_description = 'Load LDAP file of voters'
+
 
 #Cambié la entrada del census admin para añadir el boton import/export
 class CensusAdmin(ImportExportModelAdmin):
@@ -86,6 +125,6 @@ class CensusAdmin(ImportExportModelAdmin):
 
 	search_fields = ('voter_id', )
 	#Se añade el metodo de export a la lista de acciones de django
-	actions = [export_selected, reutVoting, reutVoter, removeVoterAllCensus]
+	actions = [export_selected, reutVoting, reutVoter, removeVoterAllCensus, loadLDAP]
 
 admin.site.register(Census, CensusAdmin)
