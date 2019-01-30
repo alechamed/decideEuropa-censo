@@ -111,7 +111,7 @@ class CensusAdmin(ImportExportModelAdmin):
 
 	def nombre_vot(self, obj):
 		return Voting.objects.get(pk=obj.voting_id).name
-	pillar_city.short_description = 'Voting Name'  #Renames column head	
+	nombre_vot.short_description = 'Voting Name'  #Renames column head	
 
 	search_fields = ('voter_id',)
 	#Se añade el metodo de export a la lista de acciones de django
