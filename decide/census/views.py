@@ -79,5 +79,4 @@ class CensusFilter(TemplateView):
 
     def listSuperuser(request):
         users = User.objects.filter(is_superuser=True)
-        noUsers = User.objects.filter(is_superuser=False)
-        return render (request, 'censusFilter5.html', {'users': users, 'noUsers':noUsers})
+        return render (request, 'censusFilter5.html', {'users': users})
