@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<form action="" method="post">  
+  {% csrf_token %}
+Voting IDs
+<ul>
+  {% for voting in votings %}
+    <li>
+      {{ voting }}
+    </li>
+    <input type="hidden" name="votings_ids" value="{{ voting }}" />
+  {% endfor %}
+</ul>
+
+Voter IDs
+<ul>
+  {% for voter in voters %}
+    <li>
+	
+      {{ voter}}
+    </li>
+    <input type="hidden" name="voters_ids" value="{{ voter }}" />
+  {% endfor %}
+</ul>
+
+  <input type="hidden" name="action" value="loadLDAP" />
+  <input type="submit" name="confirma" value="Confirm"/>
+  <input type="submit" name="cancel" value="Cancel"/>
+</form>  
+{% endblock %}
