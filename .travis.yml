@@ -10,6 +10,6 @@ before_install:
 - psql -c "CREATE USER decide WITH PASSWORD 'decide';" -U postgres
 - psql -c "ALTER USER decide superuser;" -U postgres
 install: 
-- pip install -r ../requirements.txt
+- pip3 install -r ../requirements.txt
 script: 
 - python3 manage.py test
