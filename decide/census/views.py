@@ -80,7 +80,7 @@ class CensusFilter(TemplateView):
     
     def listUsers(request):
         users = User.objects.all()
-        return render (request, 'censusFilter.html', {'users':users})
+        return render (request, 'censusFilter1.html', {'users':users})
     
     
     def listActivos(request):
