@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 #Hasta aqui
 from .models import Census
 from django.contrib.auth.models import User
+from voting.models import Voting
 from django.shortcuts import render
 from django.db import IntegrityError
 
@@ -100,7 +101,7 @@ removeVoterAllCensus.short_description = 'Remove voter/s from all censuss'
 class CensusAdmin(ImportExportModelAdmin):
 	#Se añade esta linea para añadir los botones import/export
 	resource_class = CensusResources
-	list_display = ('voting_id', 'voter_id', 'pillar_city')
+	list_display = ('voting_id', 'voter_id', 'pillar_city', 'nombre_vot')
 	list_filter = ('voting_id',)
 	
 	def pillar_city(self, obj):
@@ -108,7 +109,11 @@ class CensusAdmin(ImportExportModelAdmin):
 	#pillar_city.admin_order_field = 'username'  #Allows column order sorting
 	pillar_city.short_description = 'Voter Username'  #Renames column head	
 
-	search_fields = ('voter_id', 'username')
+	def nombre_vot(self, obj):
+		return Voting.objects.get(pk=obj.voting_id).name
+	pillar_city.short_description = 'Voting Name'  #Renames column head	
+
+	search_fields = ('voter_id',)
 	#Se añade el metodo de export a la lista de acciones de django
 	actions = [export_selected, reutVoting, reutVoter, removeVoterAllCensus]
 
