@@ -1,4 +1,6 @@
 from django.db import models
+from jsonschema._validators import maxLength
+
 
 
 class Census(models.Model):

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <header>
+            <title>Listado de usuarios</title>
+            <nav>
+                <ul>
+                    <li><a class="t" href="/census/listUsers"> Listado de todos los usuarios</a></li>
+                    <br>
+                    <li><a class="t" href="/census/listActivo">Listado de usuarios activos</a></li>
+                    <br>
+                    <li><a class="t" href="/census/listStaff">Listado de staff</a></li>
+                    <br>
+                    <li><a class="t" href="/census/listSuperuser">Listado de Superusuarios</a></li>
+                    <br>
+                </ul>
+            </nav>
+            <style type="text/css">
+                .t{
+                text-decoration: none;
+                padding: 6px;
+                font-weight: 600;
+                font-size: 20px;
+                color: #ffffff;
+                background-color: #00CED1;
+                border-radius: 6px;
+                border: 2px solid #0016b0;
+                }
+                .t:hover{
+                color: #1883ba;
+                background-color: #ffffff;
+                margin-top: -5;
+                padding: 9px;
+                }
+                header {
+                padding: 1em;
+                font-family: Georgia, "Times New Roman",
+                Times, serif;
+                color: #F5F5DC;
+                background-color: #F5F5DC }
+                strong{
+                color: DarkGreen;
+                }
+                p{
+                font-size: 1.2em;
+                padding-left: 4em;
+                }
+                li{
+                color: dark ;
+                font-size: 1.2em;
+                }
+                html{
+                background-color: #FFEBCD;
+                }
+                h1, h2 {
+                font-family: Helvetica, Geneva, Arial,
+                SunSans-Regular, sans-serif;}
+                h2{
+                padding-top: 1em; 
+                padding-left: 1em;
+                color: brown;
+                }
+                h1{
+                color: Chocolate;
+                font-size: 2.5em;
+                padding-left: 1em;
+                }
+                .b{
+                padding-left: 1em;
+                color: green;
+                }
+            </style>
+        </header>
+        {% extends "base.html" %}
+        {% load i18n static %}
+        {% block content %}
+        <h1>Census:</h1>
+        <h2>SuperUsuarios</h2>
+        {% for user in users %}
+        <ul>
+            <li class="b">
+                {{ user }}
+            </li>
+        </ul>
+        {%endfor%}
+        {% endblock %}
+    </body>
+</html>

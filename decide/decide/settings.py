@@ -168,21 +168,21 @@ except:
     HOSTNAME = 'localhost'
 print (HOSTNAME)
 if HOSTNAME == 'localhost' or HOSTNAME == 'guillermo-VirtualBox' or "travis-job" in HOSTNAME:
-	print ("LOCAL")
-	try:
-	    from local_settings import *
-	except ImportError:
-	    print("local_settings.py not found")	
+    print ("LOCAL")
+    try:
+        from local_settings import *
+    except ImportError:
+        print("local_settings.py not found")    
 else:
-	print ("HEROKU")
-	import django_heroku
-	django_heroku.settings(locals())
-	import dj_database_url
-	DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)	
-	try:
-	    from remote_settings import *
-	except ImportError:
-	    print("remote_settings.py not found")
+    print ("HEROKU")
+    import django_heroku
+    django_heroku.settings(locals())
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)    
+    try:
+        from remote_settings import *
+    except ImportError:
+        print("remote_settings.py not found")
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
