@@ -146,7 +146,7 @@ class CensusAdmin(ImportExportModelAdmin):
 	def pillar_city(self, obj):
 		return User.objects.get(pk=obj.voter_id).username
 	#pillar_city.admin_order_field = 'username'  #Allows column order sorting
-	pillar_city.short_description = 'Voter Username'  #Renames column head	
+	pillar_city.short_description = 'Prueba defensa'  #Renames column head	
 
 	def nombre_vot(self, obj):
 		return Voting.objects.get(pk=obj.voting_id).name
